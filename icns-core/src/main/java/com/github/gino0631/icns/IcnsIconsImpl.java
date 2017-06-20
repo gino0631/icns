@@ -74,7 +74,8 @@ final class IcnsIconsImpl implements IcnsIcons, IcnsParser {
 
     @Override
     public void writeTo(OutputStream output) throws IOException {
-        int fileSize = HEADER_SIZE;
+        final int tocSize = HEADER_SIZE + (entries.size() * HEADER_SIZE);
+        int fileSize = HEADER_SIZE + tocSize;
 
         for (Entry e : entries) {
             fileSize += (HEADER_SIZE + e.getSize());
@@ -87,7 +88,7 @@ final class IcnsIconsImpl implements IcnsIcons, IcnsParser {
 
         // TOC
         dos.writeInt(toInt(TOC));
-        dos.writeInt(HEADER_SIZE + (entries.size() * HEADER_SIZE));
+        dos.writeInt(tocSize);
         for (Entry e : entries) {
             dos.writeInt(toInt(e.getOsType()));
             dos.writeInt(HEADER_SIZE + e.getSize());

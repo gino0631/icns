@@ -14,7 +14,7 @@
         <groupId>com.github.gino0631</groupId>
         <artifactId>icns-maven-plugin</artifactId>
         <configuration>
-          <outputFile>../generated</outputFile>
+          <outputFile>generated</outputFile>
           <icons>
             <icon>ic07_128x128.png</icon>
             <icon>ic08_256x256.png</icon>

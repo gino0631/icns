@@ -38,7 +38,7 @@ public class IcnsMojo extends AbstractMojo {
      * Output file.
      */
     @Parameter(required = true)
-    private File outputFile;
+    private String outputFile;
 
     /**
      * Icon base directory.
@@ -83,7 +83,7 @@ public class IcnsMojo extends AbstractMojo {
             return osType;
 
         } else {
-            String name = icon.getFile().getName();
+            String name = Paths.get(icon.getFile()).getFileName().toString();
 
             try {
                 try (InputStream is = getInputStream(icon)) {
@@ -118,6 +118,9 @@ public class IcnsMojo extends AbstractMojo {
 
                                             case 512:
                                                 return IcnsType.ICNS_512x512_JPEG_PNG_IMAGE.getOsType();
+
+                                            case 1024:
+                                                return IcnsType.ICNS_1024x1024_2X_JPEG_PNG_IMAGE.getOsType();
                                         }
                                     }
 
@@ -140,7 +143,7 @@ public class IcnsMojo extends AbstractMojo {
     }
 
     private InputStream getInputStream(Icon icon) throws IOException {
-        Path path = icon.getFile().toPath();
+        Path path = Paths.get(icon.getFile());
 
         if (resourceDirectory != null) {
             path = resourceDirectory.toPath().resolve(path);
@@ -150,7 +153,7 @@ public class IcnsMojo extends AbstractMojo {
     }
 
     private OutputStream getOutputStream() throws IOException {
-        Path path = outputFile.toPath();
+        Path path = Paths.get(outputFile);
 
         if (path.getFileName().toString().indexOf('.') < 0) {
             path = Paths.get(path.toString() + ".icns");
@@ -159,6 +162,8 @@ public class IcnsMojo extends AbstractMojo {
         if (buildDirectory != null) {
             path = buildDirectory.toPath().resolve(path);
         }
+
+        Files.createDirectories(path.getParent());
 
         return Files.newOutputStream(path);
     }

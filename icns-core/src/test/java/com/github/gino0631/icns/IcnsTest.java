@@ -60,20 +60,28 @@ public class IcnsTest {
     @Test
     public void testBuild() throws Exception {
         try (IcnsBuilder builder = IcnsBuilder.getInstance()) {
+            builder.add(IcnsType.ICNS_16x16_24BIT_IMAGE, Files.newInputStream(getResource("/is32")));
+            builder.add(IcnsType.ICNS_16x16_8BIT_MASK, Files.newInputStream(getResource("/s8mk")));
+            builder.add(IcnsType.ICNS_32x32_24BIT_IMAGE, Files.newInputStream(getResource("/il32")));
+            builder.add(IcnsType.ICNS_32x32_8BIT_MASK, Files.newInputStream(getResource("/l8mk")));
             builder.add(IcnsType.ICNS_128x128_JPEG_PNG_IMAGE, Files.newInputStream(getResource("/ic07_128x128.png")));
             builder.add(IcnsType.ICNS_256x256_JPEG_PNG_IMAGE, Files.newInputStream(getResource("/ic08_256x256.png")));
             builder.add(IcnsType.ICNS_512x512_JPEG_PNG_IMAGE, Files.newInputStream(getResource("/ic09_512x512.png")));
+            builder.add(IcnsType.ICNS_16x16_2X_JPEG_PNG_IMAGE, Files.newInputStream(getResource("/ic11_16x16@2x.png")));
+            builder.add(IcnsType.ICNS_32x32_2X_JPEG_PNG_IMAGE, Files.newInputStream(getResource("/ic12_32x32@2x.png")));
+            builder.add(IcnsType.ICNS_128x128_2X_JPEG_PNG_IMAGE, Files.newInputStream(getResource("/ic13_128x128@2x.png")));
+            builder.add(IcnsType.ICNS_256x256_2X_JPEG_PNG_IMAGE, Files.newInputStream(getResource("/ic14_256x256@2x.png")));
+            builder.add(IcnsType.ICNS_1024x1024_2X_JPEG_PNG_IMAGE, Files.newInputStream(getResource("/ic10_1024x1024.png")));
 
             try (IcnsIcons builtIcons = builder.build()) {
-                assertEquals(3, builtIcons.getEntries().size());
+                assertEquals(12, builtIcons.getEntries().size());
 
-                try (OutputStream os = Files.newOutputStream(getResource("/").resolve("generated.icns"))) {
+                Path output = getResource("/").resolve("generated.icns");
+                try (OutputStream os = Files.newOutputStream(output)) {
                     builtIcons.writeTo(os);
                 }
 
-                try (IcnsIcons loadedIcons = IcnsIcons.load(getResource("/generated.icns"))) {
-                    assertEquals(3, loadedIcons.getEntries().size());
-                }
+                assertArrayEquals(Files.readAllBytes(getResource("/compass.icns")), Files.readAllBytes(output));
             }
         }
     }

@@ -2,14 +2,12 @@ package com.github.gino0631.icns.maven;
 
 import org.apache.maven.plugins.annotations.Parameter;
 
-import java.io.File;
-
 public class Icon {
     /**
      * Icon file.
      */
     @Parameter(required = true)
-    private File file;
+    private String file;
 
     /**
      * OSType identifier of the icon type.
@@ -18,12 +16,12 @@ public class Icon {
     private String osType;
 
     public Icon set(String file) {
-        this.file = new File(file);
+        this.file = file;
 
         return this;
     }
 
-    public File getFile() {
+    public String getFile() {
         return file;
     }
 
