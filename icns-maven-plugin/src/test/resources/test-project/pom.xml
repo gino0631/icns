@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.github.gino0631</groupId>
+  <artifactId>icns-maven-plugin-test</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>ICNS Maven Plugin Test</name>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.github.gino0631</groupId>
+        <artifactId>icns-maven-plugin</artifactId>
+        <configuration>
+          <outputFile>../generated</outputFile>
+          <icons>
+            <icon>ic07_128x128.png</icon>
+            <icon>ic08_256x256.png</icon>
+            <icon>ic09_512x512.png</icon>
+          </icons>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
