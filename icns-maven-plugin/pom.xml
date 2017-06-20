@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.github.gino0631</groupId>
     <artifactId>icns-root</artifactId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
   </parent>
 
   <artifactId>icns-maven-plugin</artifactId>
