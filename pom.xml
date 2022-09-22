@@ -3,7 +3,7 @@
 
   <groupId>com.github.gino0631</groupId>
   <artifactId>icns-root</artifactId>
-  <version>1.2-SNAPSHOT</version>
+  <version>1.2</version>
   <packaging>pom</packaging>
 
   <name>ICNS Project Root</name>
@@ -32,7 +32,7 @@
     <connection>scm:git:git://github.com/gino0631/icns.git</connection>
     <developerConnection>scm:git:git@github.com:gino0631/icns.git</developerConnection>
     <url>https://github.com/gino0631/icns</url>
-    <tag>HEAD</tag>
+    <tag>icns-root-1.2</tag>
   </scm>
   <distributionManagement>
     <repository>
